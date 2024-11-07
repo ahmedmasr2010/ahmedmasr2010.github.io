@@ -4,3 +4,30 @@
 <i>barcellona </i>
 <b>visca barca</b>
 <h3>messi❤</h3>
+<b># Funzione per calcolare la proporzione
+def calcola_proporzione(a, b, c=None, d=None):
+    if c is not None and d is None:
+        # Calcoliamo d (d = b * c / a)
+        d = b * c / a
+        return d
+    elif d is not None and c is None:
+        # Calcoliamo c (c = a * d / b)
+        c = a * d / b
+        return c
+    else:
+        raise ValueError("Devi conoscere 3 valori per calcolare il quarto!")
+
+# Esempi di utilizzo
+a = 2
+b = 4
+c = 6
+
+# Calcoliamo d (la quarta variabile)
+d = calcola_proporzione(a, b, c=c)
+print(f"La proporzione calcolata è: {d}")
+
+# Oppure puoi calcolare c se conosci a, b, e d
+d = 8
+c = calcola_proporzione(a, b, d=d)
+print(f"Il valore di c è: {c}")
+</b>
