@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avventura nella Foresta Magica</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -15,4 +21,112 @@
             <p id="testo-storia">Ti trovi nel cuore di una foresta magica. Davanti a te ci sono due sentieri: uno conduce a una caverna oscura, l'altro a un fiume scintillante. Cosa scegli?</p>
             <div id="scelte">
                 <button onclick="scegliSentiero('caverna')">Vai verso la caverna</button>
-                <button onclick="scegliSentiero('fiume')">
+                <button onclick="scegliSentiero('fiume')">Vai verso il fiume</button>
+            </div>
+            <!-- صورة للغابة السحرية -->
+            <img id="immagine-iniziale" src="images/forest.jpg" alt="Foresta Magica">
+        </section>
+        <section id="storia-successiva" style="display:none;">
+            <p id="testo-storia-successiva"></p>
+            <div id="scelte-successive"></div>
+            <img id="immagine-successiva" src="" alt="Scelta Successiva" style="display:none;">
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 Gioco Interattivo</p>
+    </footer>
+    <script>
+        function scegliSentiero(scelta) {
+            let testoStoria = document.getElementById('testo-storia');
+            let scelte = document.getElementById('scelte');
+            let storiaSuccessiva = document.getElementById('storia-successiva');
+            let testoStoriaSuccessiva = document.getElementById('testo-storia-successiva');
+            let scelteSuccessive = document.getElementById('scelte-successive');
+            let immagineIniziale = document.getElementById('immagine-iniziale');
+            let immagineSuccessiva = document.getElementById('immagine-successiva');
+
+            testoStoria.style.display = 'none';
+            scelte.style.display = 'none';
+            immagineIniziale.style.display = 'none';
+            storiaSuccessiva.style.display = 'block';
+
+            if (scelta === 'caverna') {
+                testoStoriaSuccessiva.textContent = 'Decidi di entrare nella caverna oscura. All\'interno, una luce misteriosa brilla in lontananza. Senti un rumore provenire da una delle pareti. Cosa fai?';
+                scelteSuccessive.innerHTML = `
+                    <button onclick="scegliAzione('ascolta')">Ascolta il rumore</button>
+                    <button onclick="scegliAzione('esplora')">Esplora la luce misteriosa</button>
+                `;
+                immagineSuccessiva.src = 'images/caverna.jpg';
+                immagineSuccessiva.style.display = 'block';
+            } else if (scelta === 'fiume') {
+                testoStoriaSuccessiva.textContent = 'Arrivi al fiume scintillante, le acque sono calme e cristalline. Ti sembra che qualcosa stia nuotando sotto la superficie. Cosa fai?';
+                scelteSuccessive.innerHTML = `
+                    <button onclick="scegliAzione('nuota')">Nuota nel fiume</button>
+                    <button onclick="scegliAzione('osserva')">Osserva da riva</button>
+                `;
+                immagineSuccessiva.src = 'images/fiume.jpg';
+                immagineSuccessiva.style.display = 'block';
+            }
+        }
+
+        function scegliAzione(azione) {
+            let testoStoriaSuccessiva = document.getElementById('testo-storia-successiva');
+            let scelteSuccessive = document.getElementById('scelte-successive');
+            let immagineSuccessiva = document.getElementById('immagine-successiva');
+
+            if (azione === 'ascolta') {
+                testoStoriaSuccessiva.textContent = 'Ascolti attentamente il rumore e ti rendi conto che proviene da un piccolo drago nascosto. Senti che è amichevole. Cosa fai ora?';
+                scelteSuccessive.innerHTML = `
+                    <button onclick="scegliAzione('parla')">Parla con il drago</button>
+                    <button onclick="scegliAzione('accarezza')">Accarezza il drago</button>
+                `;
+                immagineSuccessiva.src = 'images/drago.jpg';
+            } else if (azione === 'esplora') {
+                testoStoriaSuccessiva.textContent = 'Ti avvicini alla luce misteriosa e scopri che è una gemma magica. Quando la tocchi, il terreno sotto di te inizia a tremare! Cosa fai?';
+                scelteSuccessive.innerHTML = `
+                    <button onclick="scegliAzione('prendi')">Prendi la gemma</button>
+                    <button onclick="scegliAzione('scappa')">Scappa dalla caverna</button>
+                `;
+                immagineSuccessiva.src = 'images/gemma.jpg';
+            } else if (azione === 'nuota') {
+                testoStoriaSuccessiva.textContent = 'Nuoti nel fiume e scopri una porta sottomarina che conduce a un altro mondo. Vuoi entrare?';
+                scelteSuccessive.innerHTML = `
+                    <button onclick="scegliAzione('entra')">Entra nel mondo sotterraneo</button>
+                    <button onclick="scegliAzione('torna')">Torna indietro sulla riva</button>
+                `;
+                immagineSuccessiva.src = 'images/porta-sottomarina.jpg';
+            } else if (azione === 'osserva') {
+                testoStoriaSuccessiva.textContent = 'Osservi le acque del fiume e vedi una figura misteriosa nuotare velocemente. Decidi di seguirla, ma potrebbe esserci un rischio. Cosa fai?';
+                scelteSuccessive.innerHTML = `
+                    <button onclick="scegliAzione('segui')">Segui la figura misteriosa</button>
+                    <button onclick="scegliAzione('non-segui')">Non seguire e torna indietro</button>
+                `;
+                immagineSuccessiva.src = 'images/figura-misteriosa.jpg';
+            } else if (azione === 'parla') {
+                testoStoriaSuccessiva.textContent = 'Il drago ti parla e ti racconta che è stato imprigionato nella caverna da una maledizione. Vuoi aiutarlo a fuggire?';
+                scelteSuccessive.innerHTML = `
+                    <button onclick="scegliAzione('aiuta')">Aiuta il drago</button>
+                    <button onclick="scegliAzione('lascia')">Lascia il drago e vai via</button>
+                `;
+                immagineSuccessiva.src = 'images/drago-parla.jpg';
+            } else if (azione === 'accarezza') {
+                testoStoriaSuccessiva.textContent = 'Accarezzi il drago e si risveglia un potente incantesimo che ti dona il potere di volare! Cosa fai ora?';
+                scelteSuccessive.innerHTML = `
+                    <button onclick="scegliAzione('vola')">Vola sopra la foresta</button>
+                    <button onclick="scegliAzione('atterra')">Atterra e cerca una via di fuga</button>
+                `;
+                immagineSuccessiva.src = 'images/volo.jpg';
+            } else if (azione === 'prendi') {
+                testoStoriaSuccessiva.textContent = 'Prendi la gemma e all\'improvviso una tempesta magica si scatena. Devi decidere in fretta! Cosa fai?';
+                scelteSuccessive.innerHTML = `
+                    <button onclick="scegliAzione('combatti')">Combatti la tempesta</button>
+                    <button onclick="scegliAzione('scappa')">Scappa velocemente dalla caverna</button>
+                `;
+                immagineSuccessiva.src = 'images/tempesta.jpg';
+            } else if (azione === 'scappa') {
+                testoStoriaSuccessiva.textContent = 'Fuggi dalla caverna e ti rendi conto che la foresta è cambiata. Nuove opportunità ti aspettano. La tua avventura continua...';
+                scelteSuccessive.innerHTML = '';
+                immagineSuccessiva.src = 'images/foresta-nuova.jpg';
+            } else if (azione === 'entra') {
+                testoStoriaSuccessiva.textContent = 'Entri nel mondo sotterraneo e ti trovi in un regno incantato. Devi fare una scelta saggia per non perderti. Cosa fai?';
+                scelteSuccessive.innerHTML
